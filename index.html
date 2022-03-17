@@ -8,16 +8,47 @@
             display: inline-block;
         }
         .mr-2 {
-            margin-right: 2rem;
+            margin-right: 5px;
         }
-        .table-book {
+        .mr-3 {
+            margin-right: 10px;
+        }
+        .fig-book {
             background-color: #eee;
+            padding: 7px 7px 15px 7px;
+            border-radius: 2px;
+            color: #333;
+            margin: 0;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .fig-book:hover {
+            border-color: #333;
+        }
+
+        .fig-book img {
+            margin-bottom: 10px;
+            width: 100%;
+            max-height: 200px;
+            background-color: #333;
+            display: block;
+        }
+        .fig-book figcaption {
+            line-height: 1.3;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .label::after {
+            content: ":";
+        }
+        .label-text {
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     Hello World! 123
-
     <script src="index.js"></script>
 </body>
 </html>
