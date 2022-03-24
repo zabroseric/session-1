@@ -2,11 +2,12 @@ const booksAction = [
     {
         name: 'Action Book 1',
         author: 'Some Author 1',
-        description: '123 long text',
+        description: '123 long text dfawdfaw awdawpd9awf9awnf faw joawfuiawdfawfinaf n n fonawfna da dadaw a dad awda da dawoinfaow inawdfawinwaifawf nfwao',
         image: 'action-book-1.jpg',
     },
     {
         name: 'Action Book 2',
+        description: '123 long text dfawdfaw awdaw',
     },
 ];
 
@@ -23,12 +24,25 @@ const booksAdventure = [
     },
 ];
 
-const renderLabelValue = (label, value) => `
+const renderLabelValue = (label, value, maxLength) => `
     <div>
         <span class="label">${label}</span>
-        <span class="label-text">${value}</span>
+        <span class="label-text">${
+            maxLength && value.length - 1 > maxLength ?
+            value.substring(0, maxLength - 3) + '...'
+            : value
+        }
+        </span>
     </div>
 `
+
+// maxlength = 10
+// text < 10 = text
+// text > 10 = text.substring + ...
+
+
+// renderLabelValue();
+// renderLabelValue(undefined, undefined, undefined);
 
 // URL: http://localhost/page-1
 // SRC: img/books/default-book.png
@@ -45,15 +59,17 @@ const renderLabelValue = (label, value) => `
 
 // if ( a && b ) ---
 
-const a = somevar ? 'c' : 'd';
+// const a = somevar ? 'c' : 'd';
 
 const renderBookFigure = (bookParam) => `
     <figure class="fig-book">
-        <img src="/img/books/${bookParam.image ?? 'default-book.png'}" alt="Book Image"/>
+        <div class="fig-img">
+            <img src="/img/books/${bookParam.image ?? 'default-book.png'}" alt="Book Image"/>
+        </div>
         <figcaption>
             ${renderLabelValue('Name', bookParam.name ?? 'Unknown Book')}
             ${renderLabelValue('Author', bookParam.author ?? 'Unknown Author')}
-            ${bookParam.description ? renderLabelValue('Description', bookParam.description) : ''}
+            ${bookParam.description ? renderLabelValue('Description', bookParam.description, 50) : ''}
         </figcaption>
     </figure>
 `;
@@ -93,9 +109,11 @@ function renderTable(bookParam) {
 }
 
 document.body.innerHTML = `
-    ${booksAction.map(book => `
-        <div class="d-inline mr-2">
-            ${renderBookFigure(book)}
-        </div>
-    `).join('')}
+    <div class="flex-grid">
+        ${booksAction.map(book => `
+            <div class="mr-2">
+                ${renderBookFigure(book)}
+            </div>
+        `).join('')}
+    </div>
 `;
