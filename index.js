@@ -1,29 +1,22 @@
-const booksAction = [
-    {
-        name: 'Action Book 1',
-        author: 'Some Author 1',
-        description: '123 long text dfawdfaw awdawpd9awf9awnf faw joawfuiawdfawfinaf n n fonawfna da dadaw a dad awda da dawoinfaow inawdfawinwaifawf nfwao',
-        image: 'action-book-1.jpg',
-    },
-    {
-        name: 'Action Book 2',
-        description: '123 long text dfawdfaw awdaw',
-    },
-];
 
-const booksAdventure = [
-    {
-        name: 'Adventure Book 1',
-        author: 'Some Author 1',
-        image: 'default-book.png',
-    },
-    {
-        name: 'Adventure  Book 2',
-        author: 'Some Author 2',
-        image: 'default-book.png',
-    },
-];
 
+// const someFunction = async () => {
+//     for (var i = 0; i < 1000; i++) {
+//         console.log('a');
+//     }
+// }
+//
+// // Pipe 2
+// someFunction().then(() => {
+//     console.log('done');
+// });
+
+
+// Pipe 3
+// someFunction();
+
+
+// Pipe 1
 const renderLabelValue = (label, value, maxLength) => `
     <div>
         <span class="label">${label}</span>
@@ -35,31 +28,6 @@ const renderLabelValue = (label, value, maxLength) => `
         </span>
     </div>
 `
-
-// maxlength = 10
-// text < 10 = text
-// text > 10 = text.substring + ...
-
-
-// renderLabelValue();
-// renderLabelValue(undefined, undefined, undefined);
-
-// URL: http://localhost/page-1
-// SRC: img/books/default-book.png
-// Image: http://localhost/page-1/img/books/default-book.png
-
-// SRC: /img/books/default-book.png
-// Image: http://localhost/img/books/default-book.png
-
-// const a = undefined ?? 'abc'
-// // abc
-//
-// const b = 'a' ?? 'abc';
-// // a
-
-// if ( a && b ) ---
-
-// const a = somevar ? 'c' : 'd';
 
 const renderBookFigure = (bookParam) => `
     <figure class="fig-book">
@@ -74,46 +42,25 @@ const renderBookFigure = (bookParam) => `
     </figure>
 `;
 
-function renderTable(bookParam) {
-    if (bookParam.length === 0) {
-        console.error('Books has an unexpected size of 0');
-        return 'An error occurred, please contact support';
-    }
-
-    // Render the html table body tag
-    let htmlBody = '';
-    for (let i = 0; i < bookParam.length; i++) {
-        const book = bookParam[i];
-        const bookArray = Object.values(book);
-
-        htmlBody += '<tr>';
-        for (let j = 0; j < bookArray.length; j++) {
-            htmlBody += `<td>${bookArray[j]}</td>`;
-        }
-        htmlBody += '</tr>';
-    }
-
-    // Render the html table head tag
-    let htmlThead = '';
-
-    const book = bookParam[0];
-    const bookArray = Object.keys(book);
-
-    htmlThead += '<tr>';
-    for (let j = 0; j < bookArray.length; j++) {
-        htmlThead += `<th>${bookArray[j]}</th>`;
-    }
-    htmlThead += '</tr>';
-
-    return `<table class="table-book"><thead>${htmlThead}</thead><tbody>${htmlBody}</tbody></table>`;
-}
-
-document.body.innerHTML = `
+const renderPage = (data) => `
     <div class="flex-grid">
-        ${booksAction.map(book => `
+        ${data.map(book => `
             <div class="mr-2">
                 ${renderBookFigure(book)}
             </div>
         `).join('')}
     </div>
 `;
+
+// Pipe 1
+fetch('/api/v1/books.json') // Pipe 2
+    .then(data => data.json()) // Pipe 2
+    .then(data => {
+        setTimeout(() => {
+            document.body.innerHTML = renderPage(data);
+        }, 1000);
+    })
+    .catch(error => { // Pipe 3
+        document.body.innerHTML = 'An error occurred';
+    })
+;
