@@ -29,6 +29,11 @@ const renderLabelValue = (label, value, maxLength) => `
     </div>
 `
 
+//
+//
+//
+
+
 const renderBookFigure = (bookParam) => `
     <figure class="fig-book">
         <div class="fig-img">
@@ -42,8 +47,9 @@ const renderBookFigure = (bookParam) => `
     </figure>
 `;
 
-const renderPage = (data) => `
+const renderBookCategory = (category, data) => `
     <div class="flex-grid">
+        <h2>${category}</h2>
         ${data.map(book => `
             <div class="mr-2">
                 ${renderBookFigure(book)}
@@ -52,15 +58,25 @@ const renderPage = (data) => `
     </div>
 `;
 
-// Pipe 1
-fetch('/api/v1/books.json') // Pipe 2
-    .then(data => data.json()) // Pipe 2
+const bookTypes = [
+  'action',
+  'adventure',
+  'fantasy',
+];
+
+bookTypes.map((bookType) =>
+  fetch(`/api/v1/books-${bookType}.json`)
+    .then(data => data.json())
     .then(data => {
-        setTimeout(() => {
-            document.body.innerHTML = renderPage(data);
-        }, 1000);
+      setTimeout(() => {
+        document.body.innerHTML += renderBookCategory(bookType, data);
+      }, 100);
     })
-    .catch(error => { // Pipe 3
-        document.body.innerHTML = 'An error occurred';
+    .catch(error => {
+      console.error(error);
+      document.body.innerHTML += `An error occurred with the book type ${bookType}<br/>`;
     })
-;
+    .finally(() => {
+      document.body.innerHTML = document.body.innerHTML.replace('Loading...', '');
+    })
+);
