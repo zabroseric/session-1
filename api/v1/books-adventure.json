@@ -1,8 +1,32 @@
 [
-    {
-        "name": "Adventure Book 1",
-        "author": "Some Author 1",
-        "description": "123 long text dfawdfaw awdawpd9awf9awnf faw joawfuiawdfawfinaf n n fonawfna da dadaw a dad awda da dawoinfaow inawdfawinwaifawf nfwao",
-        "image": "action-book-1.jpg"
-    }
+  {
+    "name": "The Lord Of The Rings",
+    "author": "J.R.R Tolkien",
+    "description": "Nam ultrices ullamcorper augue sed convallis. Nullam maximus eu ante et convallis. In porta id risus in viverra. In congue feugiat urna nec commodo. Duis consequat massa at dui cursus varius. Aenean quis faucibus arcu, porta ultrices arcu.",
+    "image": "avt1.png"
+  },
+  {
+    "name": "The Return Of The King",
+    "author": "J.R.R Tolkien",
+    "description": "Nullam sit amet arcu nibh. Fusce molestie ex sit amet sollicitudin malesuada. Curabitur sed massa sollicitudin, tincidunt urna vitae, sodales arcu.",
+    "image": "avt2.png"
+  },
+  {
+    "name": "Watership Down",
+    "author": "Richard Adams",
+    "description": "Pellentesque congue, ante a porttitor ultricies, turpis ipsum vehicula arcu, nec commodo lorem libero non nulla. Praesent lacus justo, mattis id elit sed, blandit sollicitudin sapien. Proin ultricies scelerisque odio imperdiet ornare. Sed id risus diam. ",
+    "image": "avt3.png"
+  },
+  {
+    "name": "It Ends With Us",
+    "author": "Colleen Hoover",
+    "description": "Quisque aliquet, nunc eget elementum tempor, nibh nunc pretium libero, vel vestibulum diam augue eget ante. Quisque sed eros placerat, iaculis dolor quis, ornare quam. Integer auctor sollicitudin est eget cursus. Etiam euismod vitae arcu in pharetra. Curabitur sit amet metus et ipsum rhoncus faucibus et quis massa. Suspendisse sit amet odio vel nisl aliquet congue.\n\n",
+    "image": "avt4.png"
+  },
+  {
+    "name": "A Night In The Forest",
+    "author": "Tonya M.B",
+    "description": "Sachiko  Minami is a talented young girl, who is involved in basically everything. From schoolwork, to pollution! \nOne day, her enthusiasm has been taken too far, when one of her closest friends plays a prank on her.\nA large series of events take place in front of Sachiko and getting her pranker away and out of her life forever, will Sachiko get through them all in success?",
+    "image": "avt5.png"
+  }
 ]

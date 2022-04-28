@@ -1,11 +1,32 @@
 [
-    {
-        "name": "Fantasy Book 1",
-        "author": "Some Author 1",
-        "description": "123 long text dfawdfaw awdawpd9awf9awnf faw joawfuiawdfawfinaf n n fonawfna da dadaw a dad awda da dawoinfaow inawdfawinwaifawf nfwao"
-    },
-    {
-        "name": "Fantasy Book 2",
-        "description": "123 long text dfawdfaw awdaw"
-    }
+  {
+    "name": "Sin Eater",
+    "author": "Megan Campisi",
+    "description": "Fusce blandit eros eu metus malesuada, et consectetur neque mollis. Morbi fringilla venenatis viverra. Aenean risus sapien, congue eu eleifend et, interdum eu turpis. Integer enim eros, ultricies nec sodales in, tincidunt nec lacus.",
+    "image": "fsy1.png"
+  },
+  {
+    "name": "Twilight 1",
+    "author": "Stephenie Meyer",
+    "description": "Mauris porttitor ex vitae erat pharetra suscipit. Aenean pellentesque in ligula ac maximus. Phasellus erat est, egestas et semper eleifend, fringilla in ante.",
+    "image": "fsy2.png"
+  },
+  {
+    "name": "Twilight 2",
+    "author": "Stephenie Meyer",
+    "description": "Donec enim lectus, pulvinar ac justo eu, aliquam tristique risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque finibus laoreet sapien, vel imperdiet magna facilisis ut. Suspendisse eu hendrerit purus. Donec vestibulum lectus lectus, ac dapibus nunc iaculis sit amet. Quisque non est venenatis, consectetur sapien vel, dignissim odio. Mauris bibendum quam purus, ut vestibulum justo sollicitudin id.",
+    "image": "fsy3.png"
+  },
+  {
+    "name": "Twilight 3",
+    "author": "Stephenie Meyer",
+    "description": "Nulla vel nibh tortor. Vestibulum sapien arcu, cursus sit amet dui sed, congue elementum nulla. Donec fringilla arcu sed arcu pulvinar, nec rutrum orci vestibulum.",
+    "image": "fsy4.png"
+  },
+  {
+    "name": "Twilight 4",
+    "author": "Stephenie Meyer",
+    "description": "Donec volutpat enim sit amet risus cursus pellentesque. Nullam enim dolor, dictum eu elit sit amet, laoreet luctus diam. ",
+    "image": "fsy5.png"
+  }
 ]
