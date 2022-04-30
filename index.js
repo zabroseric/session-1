@@ -75,7 +75,7 @@ const bookTypes = [
 
 
 bookTypes.map((bookType) =>
-    fetch(`/api/v1/books-${bookType}.json`)
+    fetch(`./api/v1/books-${bookType}.json`)
         .then(data => data.json())
         .then(data => {
             setTimeout(() => {
