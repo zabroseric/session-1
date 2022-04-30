@@ -13,7 +13,7 @@ const renderLabelValue = (label, value, maxLength) => `
 const renderBookFigure = (bookParam) => `
     <figure class="fig-book">
         <div class="fig-img">
-            <img src="/img/books/${bookParam.image ?? 'default-book.png'}" alt="Book Image"/>
+            <img src="./img/books/${bookParam.image ?? 'default-book.png'}" alt="Book Image"/>
         </div>
         <figcaption>
             ${renderLabelValue('Name', bookParam.name ?? 'Unknown Book')}
