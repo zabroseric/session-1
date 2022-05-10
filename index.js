@@ -56,10 +56,10 @@ const renderBookCategory = (bookType, data) => `
 How you made that interaction.
  */
 const onButtonPreviousClick = (bookType) => {
-  shiftBooksRight(bookType, 1);
+  shiftBooksRight(bookType, -1);
 };
 const onButtonNextClick = (bookType) => {
-  shiftBooksRight(bookType, -1);
+  shiftBooksRight(bookType, 1);
 };
 
 
@@ -67,32 +67,53 @@ const onButtonNextClick = (bookType) => {
 Cares about moving the books to the left or right.
  */
 const shiftBooksRight = (bookType, directionMultiplier) => {
-  const element = document.querySelector(`.book-category[data-category="${bookType}"] div`);
-  const bookWidth = document.querySelector('.fig-book').offsetWidth;
-  const currentOffset = parseFloat(element.style.marginLeft !== '' ? element.style.marginLeft : 0);
+  // The size of the category box on the screen.
+  const elementSection = document.querySelector(`.book-category[data-category="${bookType}"]`);
 
-  const allChildren = element.querySelectorAll('.fig-book').length;
-  const rowWidth = allChildren * bookWidth;
+  // The size of the row, and everything hiding off the edge.
+  const elementRow = document.querySelector(`.book-category[data-category="${bookType}"] div`);
 
-  const newOffset = getBookShiftOffset(rowWidth, bookWidth, currentOffset, directionMultiplier * bookShiftQuantity);
-  element.style.marginLeft = `${newOffset}px`;
+  // Multiply by -1, so that +1 = move to right, and -1 = move to left.
+  const currentOffset = -1 * parseFloat(elementRow.style.marginLeft !== '' ? elementRow.style.marginLeft : 0);
+
+  const bookWidth = document.querySelector('.fig-book').clientWidth;
+  const viewWidth = elementSection.clientWidth;
+  const rowWidth = elementRow.scrollWidth;
+
+  const newOffset = getBookShiftOffset(rowWidth, viewWidth, currentOffset, directionMultiplier * bookShiftQuantity * bookWidth);
+  elementRow.style.marginLeft = `${-1 * newOffset}px`;
+
+  // ADD SHOW/HIDE BUTTON HERE
+  // -------
+  // Logic:
+  // -------
+  // If maxOffset === newOffset
+  // If getBookShiftOffset(rowWidth, viewWidth, 0, 9999) === newOffset
+  // -------
+  // Style:
+  // -------
+  // buttonElement.style.visibility = hidden / visible
 }
 
 /*
 Cares about doing the calculation and what the new offset is.
  */
-const getBookShiftOffset = (rowWidth, bookWidth, currentOffset, numberOfBooks) => {
-  console.log(`Running book shift with quantity ${numberOfBooks}`);
-  if (numberOfBooks === 0) {
-    return currentOffset;
-  }
+const getBookShiftOffset = (rowWidth, viewWidth, currentOffset, offsetChange) => {
+  const minOffset = 0;
+  const maxOffset = rowWidth - viewWidth > 0 ? rowWidth - viewWidth : 0;
+  const newOffset = `${currentOffset + offsetChange}`;
 
-  const newOffset = `${currentOffset + numberOfBooks * bookWidth}`;
-  const directionMultiplier = numberOfBooks > 0 ? 1 : -1;
+  console.log('Calculating book shift offset:', {rowWidth, viewWidth, currentOffset, maxOffset, minOffset});
 
-  if (newOffset > 0 || rowWidth - (-1 * newOffset) < window.innerWidth - (bookShiftQuantity * bookWidth) / 2) {
-    return getBookShiftOffset(rowWidth, bookWidth, currentOffset, numberOfBooks - directionMultiplier);
+  // If the scroll goes too far to the left, just make it the minimum offset.
+  if (newOffset < minOffset) {
+    return minOffset;
   }
+  // If the scroll goes too far to the right, just make it the maximum offset.
+  else if (newOffset > maxOffset) {
+    return maxOffset;
+  }
+  // Otherwise, just return the offset calculated.
   return newOffset;
 }
 
