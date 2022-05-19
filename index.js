@@ -27,7 +27,12 @@ const renderBookFigure = (bookParam) => `
         <figcaption>
             ${renderLabelValue('Name', bookParam.name ?? 'Unknown Book')}
             ${renderLabelValue('Author', bookParam.author ?? 'Unknown Author')}
-            ${bookParam.description ? renderLabelValue('Description', bookParam.description, 50) : ''}
+            <span class="description-partial">
+                ${bookParam.description ? renderLabelValue('Description', bookParam.description, 50) : ''}
+            </span>
+            <span class="description-full">
+                ${renderLabelValue('Description', bookParam.description)}
+            </span>
         </figcaption>
     </figure>
 `;
@@ -44,7 +49,7 @@ const renderBookCategory = (bookType, data) => `
         <h2>${bookType}</h2>
         <div class="flex-grid" id="row">
             ${data.map(book => `
-                <div class="mr-2">
+                <div class="mr-2" data-id="${book.id}" onclick="onBookClick('${book.id}')">
                     ${renderBookFigure(book)}
                 </div>
             `).join('')}
@@ -61,7 +66,22 @@ const onButtonPreviousClick = (bookType) => {
 const onButtonNextClick = (bookType) => {
   shiftBooksRight(bookType, 1);
 };
+const onBookClick = (bookId) => {
+  bookFocus(bookId);
+};
 
+const bookFocus = (bookId) => {
+  const book = document.querySelector(`*[data-id="${bookId}"] .fig-book`);
+  book.classList.toggle('active');
+
+  // Some active state
+  // - Book to right
+  // - Text to left
+  // Description show everything
+  // Description scroll
+  // Click again, goes back to original
+  // Click another, goes back to original
+}
 
 /*
 Cares about moving the books to the left or right.
@@ -83,16 +103,14 @@ const shiftBooksRight = (bookType, directionMultiplier) => {
   const newOffset = getBookShiftOffset(rowWidth, viewWidth, currentOffset, directionMultiplier * bookShiftQuantity * bookWidth);
   elementRow.style.marginLeft = `${-1 * newOffset}px`;
 
-  // ADD SHOW/HIDE BUTTON HERE
-  // -------
-  // Logic:
-  // -------
-  // If maxOffset === newOffset
-  // If getBookShiftOffset(rowWidth, viewWidth, 0, 9999) === newOffset
-  // -------
-  // Style:
-  // -------
-  // buttonElement.style.visibility = hidden / visible
+  const maxOffset = getBookShiftOffset(rowWidth, viewWidth, 0, 9999);
+  const minOffset = getBookShiftOffset(rowWidth, viewWidth, 0, -9999);
+
+  const buttonRight = elementSection.querySelector('.next');
+  const buttonLeft = elementSection.querySelector('.previous');
+
+  buttonRight.style.display = parseFloat(newOffset) === parseFloat(maxOffset) ? 'none' : 'block';
+  buttonLeft.style.display = parseFloat(newOffset) === parseFloat(minOffset) ? 'none' : 'block';
 }
 
 /*
@@ -134,6 +152,7 @@ bookTypes.map((bookType) =>
     .then(data => {
       setTimeout(() => {
         document.body.innerHTML += renderBookCategory(bookType, data);
+        shiftBooksRight(bookType, 0);
       }, 100);
     })
     .catch(error => {
